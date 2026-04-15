@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     public void OnCorrectPlanetPlaced(GameObject slot)
     {
         remainingSlots.Remove(slot);
+        feedbackText.color = Color.green;
         feedbackText.text = "Correct!";
         Invoke("ClearFeedback", 2f);
         PickNextSlot();
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void OnWrongPlanetPlaced()
     {
+        feedbackText.color = Color.red;
         feedbackText.text = "Wrong planet! Try again.";
         Invoke("ClearFeedback", 2f);
     }

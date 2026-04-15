@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class SlotDetector : MonoBehaviour
 {
     public string expectedPlanetName;
@@ -22,18 +23,28 @@ public class SlotDetector : MonoBehaviour
         {
             isOccupied = true;
 
-            // Snap planet to slot position
-            other.transform.position = transform.position;
-            other.transform.SetParent(transform);
+            // Disable grabbing
+            var grab = other.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+            if (grab != null) grab.enabled = false;
 
-            // Disable planet rigidbody so it stays in place
+            // Disable rigidbody
             Rigidbody rb = other.GetComponent<Rigidbody>();
             if (rb != null) rb.isKinematic = true;
 
-            // Hide the slot sphere
+            // Snap planet to correct orbit height and start orbiting
+            PlanetOrbit orbit = other.GetComponent<PlanetOrbit>();
+            if (orbit != null)
+            {
+                Vector3 snappedPosition = other.transform.position;
+                snappedPosition.y = orbit.center.y;
+                other.transform.position = snappedPosition;
+                orbit.StartOrbiting();
+            }
+
+            // Hide slot sphere
             GetComponent<MeshRenderer>().enabled = false;
 
-            // Tell GameManager it was correct
+            // Tell GameManager
             gameManager.OnCorrectPlanetPlaced(gameObject);
         }
         else
