@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject infoPanel;
     public TextMeshProUGUI clueText;
     public TextMeshProUGUI feedbackText;
+    public TextMeshProUGUI counterText;
 
     [Header("Slots")]
     public GameObject[] slots;
@@ -17,35 +18,38 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Add all slots to the remaining list
         foreach (GameObject slot in slots)
             remainingSlots.Add(slot);
 
         feedbackText.text = "";
+        counterText.text = "0 / 9 Planets Placed";
         PickNextSlot();
     }
 
     public void PickNextSlot()
     {
+        int placed = 9 - remainingSlots.Count;
+        counterText.text = placed + " / 9 Planets Placed";
+
         if (remainingSlots.Count == 0)
         {
-            clueText.text = "Congratulations! You placed all the planets!";
             infoPanel.SetActive(true);
+            feedbackText.color = Color.yellow;
+            clueText.text = "Congratulations!\nYou have placed all the planets correctly!";
+            feedbackText.text = "The Solar System is complete!";
             return;
         }
 
-        // Pick a random slot from remaining
         int randomIndex = Random.Range(0, remainingSlots.Count);
         currentActiveSlot = remainingSlots[randomIndex];
 
-        // Find which planet belongs here
         string slotName = currentActiveSlot.name;
         PlanetData[] allPlanets = FindObjectsOfType<PlanetData>();
         foreach (PlanetData planet in allPlanets)
         {
             if (planet.correctSlotName == slotName)
             {
-                clueText.text = planet.clue;
+                clueText.text = "Find this planet:\n\n" + planet.clue;
                 break;
             }
         }
@@ -57,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         remainingSlots.Remove(slot);
         feedbackText.color = Color.green;
-        feedbackText.text = "Correct!";
+        feedbackText.text = "Correct! Well done!";
         Invoke("ClearFeedback", 2f);
         PickNextSlot();
     }
