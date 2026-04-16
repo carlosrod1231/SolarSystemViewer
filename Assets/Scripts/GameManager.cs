@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI clueText;
     public TextMeshProUGUI feedbackText;
     public TextMeshProUGUI counterText;
-    public GameObject restartButton;
 
     [Header("Slots")]
     public GameObject[] slots;
@@ -22,12 +21,13 @@ public class GameManager : MonoBehaviour
     public AudioClip backgroundMusic;
 
     [Range(0f, 1f)] public float musicVolume = 0.3f;
-    [Range(0f, 1f)] public float sfxVolume = 0.2f;
+    [Range(0f, 1f)] public float sfxVolume = 0.4f;
 
     private List<GameObject> remainingSlots = new List<GameObject>();
     private GameObject currentActiveSlot;
     private AudioSource sfxSource;
     private AudioSource musicSource;
+    private SunInteraction sunInteraction;
 
     void Start()
     {
@@ -59,8 +59,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject slot in slots)
             remainingSlots.Add(slot);
 
-        if (restartButton != null)
-            restartButton.SetActive(false);
+        sunInteraction = FindObjectOfType<SunInteraction>();
 
         feedbackText.text = "";
         counterText.text = "0 / 9 Planets Placed";
@@ -76,12 +75,12 @@ public class GameManager : MonoBehaviour
         {
             infoPanel.SetActive(true);
             feedbackText.color = Color.yellow;
-            clueText.text = "Congratulations!\nYou have placed all the planets correctly!\n\nHead to the Welcome Panel to play again!";
+            clueText.text = "Congratulations!\nYou placed all the planets correctly!\n\nPoint at the Sun and pull the trigger to play again!";
             feedbackText.text = "The Solar System is complete!";
             if (winSound != null) sfxSource.PlayOneShot(winSound, sfxVolume);
             musicSource.volume = 0.1f;
-            if (restartButton != null)
-                restartButton.SetActive(true);
+            if (sunInteraction != null)
+                sunInteraction.SetGameWon();
             return;
         }
 
@@ -123,10 +122,5 @@ public class GameManager : MonoBehaviour
     void ClearFeedback()
     {
         feedbackText.text = "";
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
