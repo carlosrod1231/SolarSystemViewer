@@ -13,6 +13,11 @@ public class PlanetOrbit : MonoBehaviour
 
     public void StartOrbiting()
     {
+        // Calculate starting angle based on current position
+        // so planet begins orbiting from exactly where it was placed
+        float dx = transform.position.x - center.x;
+        float dz = transform.position.z - center.z;
+        angle = Mathf.Atan2(dz, dx) * Mathf.Rad2Deg;
         isOrbiting = true;
     }
 
@@ -20,7 +25,7 @@ public class PlanetOrbit : MonoBehaviour
     {
         if (!isOrbiting) return;
 
-        // Force kinematic off so orbit script can move it
+        // Force kinematic so orbit script can move it
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true;
 
