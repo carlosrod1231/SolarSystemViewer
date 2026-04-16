@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI clueText;
     public TextMeshProUGUI feedbackText;
     public TextMeshProUGUI counterText;
+    public GameObject clueLabel;
 
     [Header("Slots")]
     public GameObject[] slots;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     private AudioSource sfxSource;
     private AudioSource musicSource;
     private SunInteraction sunInteraction;
+    private SolarSystemRise solarSystemRise;
 
     void Start()
     {
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
             remainingSlots.Add(slot);
 
         sunInteraction = FindObjectOfType<SunInteraction>();
+        solarSystemRise = GetComponent<SolarSystemRise>();
 
         feedbackText.text = "";
         counterText.text = "0 / 9 Planets Placed";
@@ -75,12 +78,13 @@ public class GameManager : MonoBehaviour
         {
             infoPanel.SetActive(true);
             feedbackText.color = Color.yellow;
-            clueText.text = "Congratulations!\nYou placed all the planets correctly!\n\nPoint at the Sun and pull the trigger to play again!";
+            clueText.text = "Congratulations!\nYou placed all the planets correctly!\n\nThe solar system is rising!\n\nClick the BLACK HOLE to lower the galaxy.\nClick the COMET to raise it again.\n\nLower the galaxy and click the SUN to restart!";
             feedbackText.text = "The Solar System is complete!";
+            if (clueLabel != null) clueLabel.SetActive(false);
             if (winSound != null) sfxSource.PlayOneShot(winSound, sfxVolume);
             musicSource.volume = 0.1f;
-            if (sunInteraction != null)
-                sunInteraction.SetGameWon();
+            if (sunInteraction != null) sunInteraction.SetGameWon();
+            if (solarSystemRise != null) solarSystemRise.ActivateWinState();
             return;
         }
 

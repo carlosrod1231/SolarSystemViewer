@@ -1,16 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class SunInteraction : MonoBehaviour
+public class CometInteraction : MonoBehaviour
 {
-    private bool gameWon = false;
     private bool isHovered = false;
+    private SolarSystemRise solarSystemRise;
 
-    public void SetGameWon()
+    void Start()
     {
-        gameWon = true;
+        solarSystemRise = FindObjectOfType<SolarSystemRise>();
     }
 
     public void OnHoverEntered()
@@ -25,7 +24,7 @@ public class SunInteraction : MonoBehaviour
 
     void Update()
     {
-        if (!gameWon || !isHovered) return;
+        if (!isHovered) return;
 
         InputDevice rightDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         bool rightTrigger = false;
@@ -36,6 +35,9 @@ public class SunInteraction : MonoBehaviour
         leftDevice.TryGetFeatureValue(CommonUsages.triggerButton, out leftTrigger);
 
         if (rightTrigger || leftTrigger)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        {
+            if (solarSystemRise != null)
+                solarSystemRise.RaiseGalaxy();
+        }
     }
 }

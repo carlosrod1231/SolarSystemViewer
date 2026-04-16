@@ -10,33 +10,67 @@ public class PlanetOrbit : MonoBehaviour
 
     private float angle = 0f;
     private bool isOrbiting = false;
+    private Transform galaxyTransform;
 
     public void StartOrbiting()
     {
-        // Calculate starting angle based on current position
-        // so planet begins orbiting from exactly where it was placed
-        float dx = transform.position.x - center.x;
-        float dz = transform.position.z - center.z;
+        float dx = transform.position.x - GetWorldCenter().x;
+        float dz = transform.position.z - GetWorldCenter().z;
         angle = Mathf.Atan2(dz, dx) * Mathf.Rad2Deg;
         isOrbiting = true;
+    }
+
+    Vector3 GetWorldCenter()
+    {
+        if (galaxyTransform == null)
+        {
+            GameObject galaxy = GameObject.Find("Galaxy");
+            if (galaxy != null)
+                galaxyTransform = galaxy.transform;
+        }
+
+        if (galaxyTransform != null)
+        {
+            // Account for galaxy scale and position
+            return new Vector3(
+                galaxyTransform.position.x + center.x * galaxyTransform.localScale.x,
+                galaxyTransform.position.y + center.y * galaxyTransform.localScale.y,
+                galaxyTransform.position.z + center.z * galaxyTransform.localScale.z
+            );
+        }
+
+        return center;
+    }
+
+    float GetScaledRadiusX()
+    {
+        if (galaxyTransform != null)
+            return radiusX * galaxyTransform.localScale.x;
+        return radiusX;
+    }
+
+    float GetScaledRadiusZ()
+    {
+        if (galaxyTransform != null)
+            return radiusZ * galaxyTransform.localScale.z;
+        return radiusZ;
     }
 
     void Update()
     {
         if (!isOrbiting) return;
 
-        // Force kinematic so orbit script can move it
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true;
 
-        // Orbit around sun
+        Vector3 worldCenter = GetWorldCenter();
+
         angle += orbitSpeed * Time.deltaTime;
         float rad = angle * Mathf.Deg2Rad;
-        float x = center.x + Mathf.Cos(rad) * radiusX;
-        float z = center.z + Mathf.Sin(rad) * radiusZ;
-        transform.position = new Vector3(x, center.y, z);
+        float x = worldCenter.x + Mathf.Cos(rad) * GetScaledRadiusX();
+        float z = worldCenter.z + Mathf.Sin(rad) * GetScaledRadiusZ();
+        transform.position = new Vector3(x, worldCenter.y, z);
 
-        // Self rotation on Y axis
         transform.Rotate(0f, selfRotationSpeed * Time.deltaTime, 0f, Space.Self);
     }
 }
