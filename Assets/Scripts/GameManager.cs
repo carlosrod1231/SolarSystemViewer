@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         {
             infoPanel.SetActive(true);
             feedbackText.color = Color.yellow;
-            clueText.text = "Congratulations!\nYou have placed all the planets correctly!";
+            clueText.text = "Congratulations!\nYou have placed all the planets correctly!\n\nHead to the Welcome Panel to play again!";
             feedbackText.text = "The Solar System is complete!";
             if (winSound != null) sfxSource.PlayOneShot(winSound, sfxVolume);
             musicSource.volume = 0.1f;
