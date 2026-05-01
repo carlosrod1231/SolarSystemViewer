@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class SlotDetector : MonoBehaviour
 {
@@ -23,15 +24,16 @@ public class SlotDetector : MonoBehaviour
         {
             isOccupied = true;
 
-            // Disable grabbing
-            var grab = other.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
-            if (grab != null) grab.enabled = false;
+            XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
+            if (grab != null)
+            {
+                grab.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grab);
+                grab.enabled = false;
+            }
 
-            // Disable rigidbody
             Rigidbody rb = other.GetComponent<Rigidbody>();
             if (rb != null) rb.isKinematic = true;
 
-            // Snap planet to correct orbit height and start orbiting
             PlanetOrbit orbit = other.GetComponent<PlanetOrbit>();
             if (orbit != null)
             {
@@ -41,15 +43,20 @@ public class SlotDetector : MonoBehaviour
                 orbit.StartOrbiting();
             }
 
-            // Hide slot sphere
             GetComponent<MeshRenderer>().enabled = false;
-
-            // Tell GameManager
             gameManager.OnCorrectPlanetPlaced(gameObject);
         }
         else
         {
+            XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
+            if (grab != null)
+            {
+                grab.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grab);
+            }
+
             gameManager.OnWrongPlanetPlaced();
+            PlanetShake shake = other.GetComponent<PlanetShake>();
+            if (shake != null) shake.Shake();
         }
     }
 }

@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 37348393}
   - component: {fileID: 37348395}
   - component: {fileID: 37348396}
+  - component: {fileID: 37348397}
   m_Layer: 0
   m_Name: Pluto
   m_TagString: Untagged
@@ -554,6 +555,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &37348397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37348387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &97448371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1127,7 @@ GameObject:
   - component: {fileID: 238241398}
   - component: {fileID: 238241400}
   - component: {fileID: 238241401}
+  - component: {fileID: 238241402}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -1417,6 +1433,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &238241402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238241392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &250587994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,6 +1590,7 @@ GameObject:
   - component: {fileID: 294182723}
   - component: {fileID: 294182725}
   - component: {fileID: 294182726}
+  - component: {fileID: 294182727}
   m_Layer: 0
   m_Name: Mercury
   m_TagString: Untagged
@@ -1865,6 +1896,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &294182727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294182717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &296149277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,6 +2529,7 @@ GameObject:
   - component: {fileID: 471970091}
   - component: {fileID: 471970093}
   - component: {fileID: 471970094}
+  - component: {fileID: 471970095}
   m_Layer: 0
   m_Name: Venus
   m_TagString: Untagged
@@ -2789,6 +2835,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &471970095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471970085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &510383343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,6 +2866,7 @@ GameObject:
   - component: {fileID: 510383349}
   - component: {fileID: 510383351}
   - component: {fileID: 510383352}
+  - component: {fileID: 510383353}
   m_Layer: 0
   m_Name: Mars
   m_TagString: Untagged
@@ -3111,6 +3172,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &510383353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510383343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &526465075
 GameObject:
   m_ObjectHideFlags: 0
@@ -5767,6 +5842,7 @@ GameObject:
   - component: {fileID: 1004195797}
   - component: {fileID: 1004195799}
   - component: {fileID: 1004195800}
+  - component: {fileID: 1004195801}
   m_Layer: 0
   m_Name: Neptune
   m_TagString: Untagged
@@ -6072,6 +6148,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &1004195801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004195791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &1027594590
 GameObject:
   m_ObjectHideFlags: 0
@@ -10984,6 +11074,7 @@ GameObject:
   - component: {fileID: 1654387746}
   - component: {fileID: 1654387748}
   - component: {fileID: 1654387749}
+  - component: {fileID: 1654387750}
   m_Layer: 0
   m_Name: Uranus
   m_TagString: Untagged
@@ -11289,6 +11380,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &1654387750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654387740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &1678457598
 GameObject:
   m_ObjectHideFlags: 0
@@ -11985,6 +12090,7 @@ GameObject:
   - component: {fileID: 1931659769}
   - component: {fileID: 1931659771}
   - component: {fileID: 1931659772}
+  - component: {fileID: 1931659773}
   m_Layer: 0
   m_Name: Saturn
   m_TagString: Untagged
@@ -12291,6 +12397,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.8, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &1931659773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931659763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &1953597429
 GameObject:
   m_ObjectHideFlags: 0
@@ -12704,6 +12824,7 @@ GameObject:
   - component: {fileID: 1980705905}
   - component: {fileID: 1980705907}
   - component: {fileID: 1980705908}
+  - component: {fileID: 1980705909}
   m_Layer: 0
   m_Name: Jupiter
   m_TagString: Untagged
@@ -13009,6 +13130,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverGlow
   glowColor: {r: 1, g: 0.9271912, b: 0, a: 1}
   glowIntensity: 0.1
+--- !u!114 &1980705909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980705899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f4ffc47f628445196d9a5af6dc762e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetShake
+  shakeDuration: 0.5
+  shakeMagnitude: 0.15
 --- !u!1 &1998444690
 GameObject:
   m_ObjectHideFlags: 0
