@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
 
 public class SlotDetector : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class SlotDetector : MonoBehaviour
 
         if (planet.planetName == expectedPlanetName)
         {
-            // Planet belongs here but check if it's the requested one
             if (planet.planetName != gameManager.currentRequestedPlanet)
             {
                 XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
@@ -33,10 +33,11 @@ public class SlotDetector : MonoBehaviour
 
                 PlanetShake shake = other.GetComponent<PlanetShake>();
                 if (shake != null) shake.Shake();
+
+                StartCoroutine(DisableSlotTemporarily());
                 return;
             }
 
-            // Correct planet and correct time
             isOccupied = true;
 
             XRGrabInteractable grabCorrect = other.GetComponent<XRGrabInteractable>();
@@ -58,6 +59,9 @@ public class SlotDetector : MonoBehaviour
                 orbit.StartOrbiting();
             }
 
+            PlanetInspectTrigger inspectTrigger = other.GetComponent<PlanetInspectTrigger>();
+            if (inspectTrigger != null) inspectTrigger.SetOrbiting(true);
+
             GetComponent<MeshRenderer>().enabled = false;
             gameManager.OnCorrectPlanetPlaced(gameObject);
         }
@@ -71,6 +75,16 @@ public class SlotDetector : MonoBehaviour
 
             PlanetShake shake = other.GetComponent<PlanetShake>();
             if (shake != null) shake.Shake();
+
+            StartCoroutine(DisableSlotTemporarily());
         }
+    }
+
+    private IEnumerator DisableSlotTemporarily()
+    {
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+        yield return new WaitForSeconds(2f);
+        if (col != null) col.enabled = true;
     }
 }

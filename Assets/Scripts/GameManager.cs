@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private AudioSource musicSource;
     private SunInteraction sunInteraction;
     private SolarSystemRise solarSystemRise;
+    private PlanetData[] allPlanetData;
 
     void Start()
     {
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour
         sunInteraction = FindObjectOfType<SunInteraction>();
         solarSystemRise = GetComponent<SolarSystemRise>();
 
+        allPlanetData = FindObjectsByType<PlanetData>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
         feedbackText.text = "";
         counterText.text = "0 / 9 Planets Placed";
         PickNextSlot();
@@ -88,6 +91,8 @@ public class GameManager : MonoBehaviour
             if (sunInteraction != null) sunInteraction.SetGameWon();
             if (solarSystemRise != null) solarSystemRise.ActivateWinState();
             currentRequestedPlanet = "";
+            InspectStation inspectStation = FindObjectOfType<InspectStation>();
+            if (inspectStation != null) inspectStation.UnlockStation();
             return;
         }
 
@@ -95,13 +100,15 @@ public class GameManager : MonoBehaviour
         currentActiveSlot = remainingSlots[randomIndex];
 
         string slotName = currentActiveSlot.name;
-        PlanetData[] allPlanets = FindObjectsOfType<PlanetData>();
-        foreach (PlanetData planet in allPlanets)
+
+        bool found = false;
+        foreach (PlanetData planet in allPlanetData)
         {
             if (planet.correctSlotName == slotName)
             {
                 clueText.text = "Find this planet:\n\n" + planet.clue;
                 currentRequestedPlanet = planet.planetName;
+                found = true;
                 break;
             }
         }
