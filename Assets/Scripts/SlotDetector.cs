@@ -22,13 +22,28 @@ public class SlotDetector : MonoBehaviour
 
         if (planet.planetName == expectedPlanetName)
         {
+            // Planet belongs here but check if it's the requested one
+            if (planet.planetName != gameManager.currentRequestedPlanet)
+            {
+                XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
+                if (grab != null)
+                    grab.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grab);
+
+                gameManager.OnWrongTime();
+
+                PlanetShake shake = other.GetComponent<PlanetShake>();
+                if (shake != null) shake.Shake();
+                return;
+            }
+
+            // Correct planet and correct time
             isOccupied = true;
 
-            XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
-            if (grab != null)
+            XRGrabInteractable grabCorrect = other.GetComponent<XRGrabInteractable>();
+            if (grabCorrect != null)
             {
-                grab.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grab);
-                grab.enabled = false;
+                grabCorrect.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grabCorrect);
+                grabCorrect.enabled = false;
             }
 
             Rigidbody rb = other.GetComponent<Rigidbody>();
@@ -50,11 +65,10 @@ public class SlotDetector : MonoBehaviour
         {
             XRGrabInteractable grab = other.GetComponent<XRGrabInteractable>();
             if (grab != null)
-            {
                 grab.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grab);
-            }
 
             gameManager.OnWrongPlanetPlaced();
+
             PlanetShake shake = other.GetComponent<PlanetShake>();
             if (shake != null) shake.Shake();
         }

@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [Range(0f, 1f)] public float musicVolume = 0.3f;
     [Range(0f, 1f)] public float sfxVolume = 0.4f;
 
+    public string currentRequestedPlanet { get; private set; }
+
     private List<GameObject> remainingSlots = new List<GameObject>();
     private GameObject currentActiveSlot;
     private AudioSource sfxSource;
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
             musicSource.volume = 0.1f;
             if (sunInteraction != null) sunInteraction.SetGameWon();
             if (solarSystemRise != null) solarSystemRise.ActivateWinState();
+            currentRequestedPlanet = "";
             return;
         }
 
@@ -98,6 +101,7 @@ public class GameManager : MonoBehaviour
             if (planet.correctSlotName == slotName)
             {
                 clueText.text = "Find this planet:\n\n" + planet.clue;
+                currentRequestedPlanet = planet.planetName;
                 break;
             }
         }
@@ -119,6 +123,14 @@ public class GameManager : MonoBehaviour
     {
         feedbackText.color = Color.red;
         feedbackText.text = "Wrong planet! Try again.";
+        if (wrongSound != null) sfxSource.PlayOneShot(wrongSound, sfxVolume);
+        Invoke("ClearFeedback", 2f);
+    }
+
+    public void OnWrongTime()
+    {
+        feedbackText.color = Color.cyan;
+        feedbackText.text = "Read the clue carefully and try again!";
         if (wrongSound != null) sfxSource.PlayOneShot(wrongSound, sfxVolume);
         Invoke("ClearFeedback", 2f);
     }
