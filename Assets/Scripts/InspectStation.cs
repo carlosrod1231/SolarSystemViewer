@@ -23,12 +23,12 @@ public class InspectStation : MonoBehaviour
 
     void Start()
     {
-        if (lockedSign != null) lockedSign.SetActive(true);
+        if (lockedSign != null)    lockedSign.SetActive(true);
         if (inspectCanvas != null) inspectCanvas.SetActive(false);
         if (returnButton != null) returnButton.SetActive(false);
 
         //For Testing
-        UnlockStation();
+        //UnlockStation();
     }
 
     public void UnlockStation()
@@ -37,9 +37,9 @@ public class InspectStation : MonoBehaviour
         if (lockedSign != null) lockedSign.SetActive(false);
         if (inspectCanvas != null) inspectCanvas.SetActive(true);
 
-        // TEMPORARY - simulate occupied station for button testing
-        isOccupied = true;
-        returnButton.SetActive(true);
+        //For Testing
+        //isOccupied = true;
+        //returnButton.SetActive(true);
 
         planetNameText.text = "Point at an orbiting planet\nand pull the trigger to inspect it!";
         planetInfoText.text = "";
