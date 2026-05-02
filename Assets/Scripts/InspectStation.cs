@@ -51,7 +51,6 @@ public class InspectStation : MonoBehaviour
         isOccupied = true;
         currentPlanet = planet;
 
-        // Disable orbit FIRST before moving
         planetOrbit = planet.GetComponent<PlanetOrbit>();
         if (planetOrbit != null)
         {
@@ -60,14 +59,11 @@ public class InspectStation : MonoBehaviour
             if (rb != null) rb.isKinematic = true;
         }
 
-        // Wait one frame then move to ensure orbit is fully stopped
         StartCoroutine(MovePlanetAfterFrame(planet));
 
-        // Disable grabbing while inspecting
         var grab = planet.GetComponent<XRGrabInteractable>();
         if (grab != null) grab.enabled = false;
 
-        // Show info
         PlanetData data = planet.GetComponent<PlanetData>();
         if (data != null)
         {
