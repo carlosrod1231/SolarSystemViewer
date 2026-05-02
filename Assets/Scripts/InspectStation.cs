@@ -6,7 +6,11 @@ public class InspectStation : MonoBehaviour
 {
     [Header("Station")]
     public Transform planetDisplayPoint;
+
+    [Header("Locked Sign")]
     public GameObject lockedSign;
+    public GameObject lockedMessageText;
+    public GameObject lockedMessageText2;
 
     [Header("UI")]
     public TextMeshProUGUI planetNameText;
@@ -23,24 +27,19 @@ public class InspectStation : MonoBehaviour
 
     void Start()
     {
-        if (lockedSign != null)    lockedSign.SetActive(true);
+        if (lockedSign != null) lockedSign.SetActive(true);
+        if (lockedMessageText != null) lockedMessageText.SetActive(true);
+        if (lockedMessageText2 != null) lockedMessageText2.SetActive(true);
         if (inspectCanvas != null) inspectCanvas.SetActive(false);
         if (returnButton != null) returnButton.SetActive(false);
-
-        //For Testing
-        //UnlockStation();
     }
 
     public void UnlockStation()
     {
         isUnlocked = true;
-        if (lockedSign != null) lockedSign.SetActive(false);
+        if (lockedMessageText != null) lockedMessageText.SetActive(false);
+        if (lockedMessageText2 != null) lockedMessageText2.SetActive(false);
         if (inspectCanvas != null) inspectCanvas.SetActive(true);
-
-        //For Testing
-        //isOccupied = true;
-        //returnButton.SetActive(true);
-
         planetNameText.text = "Point at an orbiting planet\nand pull the trigger to inspect it!";
         planetInfoText.text = "";
     }
@@ -57,7 +56,6 @@ public class InspectStation : MonoBehaviour
         if (planetOrbit != null)
         {
             planetOrbit.enabled = false;
-            // Also disable rigidbody so physics doesn't interfere
             Rigidbody rb = planet.GetComponent<Rigidbody>();
             if (rb != null) rb.isKinematic = true;
         }
@@ -82,7 +80,8 @@ public class InspectStation : MonoBehaviour
 
     private System.Collections.IEnumerator MovePlanetAfterFrame(GameObject planet)
     {
-        // Wait one frame to ensure orbit script has stopped
+        yield return null;
+        yield return null;
         yield return null;
 
         PlanetData data = planet.GetComponent<PlanetData>();
@@ -97,18 +96,14 @@ public class InspectStation : MonoBehaviour
     {
         if (currentPlanet == null) return;
 
-        // Re-enable orbit
         if (planetOrbit != null) planetOrbit.enabled = true;
 
-        // Re-enable grabbing
         var grab = currentPlanet.GetComponent<XRGrabInteractable>();
         if (grab != null) grab.enabled = true;
 
-        // Reset rigidbody
         Rigidbody rb = currentPlanet.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = false;
 
-        // Reset state
         currentPlanet = null;
         planetOrbit = null;
         isOccupied = false;

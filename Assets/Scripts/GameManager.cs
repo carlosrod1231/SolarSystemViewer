@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         {
             infoPanel.SetActive(true);
             feedbackText.color = Color.yellow;
-            clueText.text = "Congratulations!\nYou placed all the planets correctly!\n\nThe solar system is rising!\n\nClick the BLACK HOLE to lower the galaxy.\nClick the COMET to raise it again.\n\nLower the galaxy and click the SUN to restart!";
+            clueText.text = "Congratulations!\nYou placed all the planets correctly!\n\nThe solar system is rising!\n\nClick the BLACK HOLE to lower the galaxy.\nClick the COMET to raise it again.\n\nVisit the INSPECT STATION to learn\nabout each planet!\n\nLower the galaxy and click the SUN to restart!";
             feedbackText.text = "The Solar System is complete!";
             if (clueLabel != null) clueLabel.SetActive(false);
             if (winSound != null) sfxSource.PlayOneShot(winSound, sfxVolume);
